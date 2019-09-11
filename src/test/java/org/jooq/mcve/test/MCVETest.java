@@ -44,6 +44,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 import org.jooq.DSLContext;
+import org.jooq.Result;
 import org.jooq.impl.DSL;
 import org.jooq.mcve.tables.records.TestRecord;
 
@@ -79,6 +80,8 @@ public class MCVETest {
            .fetchOne();
 
         result.refresh();
-        assertEquals(42, (int) result.getValue());
+
+        Result<TestRecord> results = ctx.selectFrom(TEST).where(TEST.CREATED.lt(DSL.val(result.getCreated()).plus(0).plus(10000))).fetch();
+        assertEquals(1, results.size());
     }
 }

@@ -5,6 +5,7 @@ CREATE SCHEMA mcve;
 CREATE TABLE mcve.test (
   id    INT NOT NULL AUTO_INCREMENT,
   value INT,
+  created TIMESTAMP WITH TIME ZONE DEFAULT current_timestamp(),
   
   CONSTRAINT pk_test PRIMARY KEY (id) 
 );
